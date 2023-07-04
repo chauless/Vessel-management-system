@@ -1,0 +1,67 @@
+CREATE TABLE countries
+(
+    name VARCHAR(255) NOT NULL,
+    PRIMARY KEY (name)
+);
+
+CREATE TABLE ports
+(
+    name            VARCHAR(255) NOT NULL,
+    nav_description VARCHAR(255) NOT NULL,
+    country         VARCHAR(255),
+    PRIMARY KEY (name),
+    FOREIGN KEY (country) REFERENCES countries (name)
+);
+
+CREATE TABLE shipowners
+(
+    name        VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    country     VARCHAR(255),
+    PRIMARY KEY (name),
+    FOREIGN KEY (country) REFERENCES countries (name)
+);
+
+CREATE TABLE seamen
+(
+    seaman_passport_number INTEGER      NOT NULL,
+    shipowner              VARCHAR(255),
+    citizenship            VARCHAR(255),
+    vessel                 INTEGER,
+    fullname               VARCHAR(255) NOT NULL,
+    position               VARCHAR(255) NOT NULL,
+    birthdate              DATE         NOT NULL,
+    birthplace             VARCHAR(255) NOT NULL,
+    PRIMARY KEY (seaman_passport_number),
+    FOREIGN KEY (shipowner) REFERENCES shipowners (name),
+    FOREIGN KEY (citizenship) REFERENCES countries (name),
+    FOREIGN KEY (vessel) REFERENCES vessels (IMO)
+);
+
+CREATE TABLE users
+(
+    username                VARCHAR(255) NOT NULL,
+    password                VARCHAR(255) NOT NULL,
+    role                    VARCHAR(255),
+    non_expired             BOOLEAN,
+    non_locked              BOOLEAN,
+    non_credentials_expired BOOLEAN,
+    is_enabled              BOOLEAN,
+    PRIMARY KEY (username)
+);
+
+CREATE TABLE vessels
+(
+    IMO                  INTEGER      NOT NULL,
+    country              VARCHAR(255),
+    shipowner            VARCHAR(255),
+    name                 VARCHAR(255) NOT NULL,
+    type                 VARCHAR(255),
+    building_date        DATE         NOT NULL,
+    port_of_registration VARCHAR(255) NOT NULL,
+    PRIMARY KEY (IMO),
+    FOREIGN KEY (country) REFERENCES countries (name),
+    FOREIGN KEY (shipowner) REFERENCES shipowners (name),
+    FOREIGN KEY (port_of_registration) REFERENCES ports (name)
+);
+
