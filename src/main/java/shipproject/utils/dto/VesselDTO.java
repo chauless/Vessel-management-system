@@ -5,17 +5,11 @@ import shipproject.models.Vessel;
 
 public class VesselDTO {
 
-    private ModelMapper modelMapper;
-
-    public VesselDTO() {
-        this.modelMapper = new ModelMapper();
+    public static VesselDTO convertToVesselDTO(Vessel vessel, ModelMapper modelMapper) {
+        return modelMapper.map(vessel, VesselDTO.class);
     }
 
-    public static VesselDTO convertToVesselDTO(Vessel vessel) {
-        return this.modelMapper.map(vessel, VesselDTO.class);
-    }
-
-    public Vessel convertToVessel(VesselDTO vesselDTO) {
-        return this.modelMapper.map(vesselDTO, Vessel.class);
+    public Vessel convertToVessel(VesselDTO vesselDTO, ModelMapper modelMapper) {
+        return modelMapper.map(vesselDTO, Vessel.class);
     }
 }
