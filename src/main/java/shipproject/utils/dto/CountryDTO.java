@@ -11,9 +11,15 @@ import shipproject.models.Country;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CountryDTO {
+public class CountryDTO extends DTO {
+
+    private String name;
 
     public static CountryDTO convertToCountryDTO(Country country, ModelMapper modelMapper) {
         return modelMapper.map(country, CountryDTO.class);
+    }
+
+    public static Country convertToCountry(CountryDTO countryDTO, ModelMapper modelMapper) {
+        return modelMapper.map(countryDTO, Country.class);
     }
 }

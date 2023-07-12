@@ -11,7 +11,7 @@ import shipproject.models.ShipOwner;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShipOwnerDTO {
+public class ShipOwnerDTO extends DTO {
     private CountryDTO country;
     private String name;
     private String description;

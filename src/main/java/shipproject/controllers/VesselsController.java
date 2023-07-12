@@ -13,7 +13,6 @@ import shipproject.utils.dto.VesselDTO;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static shipproject.utils.exceptions.ErrorResponse.notCreatedException;
 import static shipproject.utils.exceptions.ErrorResponse.notUpdatedException;
 
 @RestController
@@ -54,12 +53,12 @@ public class VesselsController {
                 .collect(Collectors.toList()));
     }
 
-    @PutMapping("/{IMO}")
-    public ResponseEntity<VesselDTO> updateVessel(@PathVariable Integer IMO,
-                                                  @RequestBody VesselDTO vesselDTO,
-                                                  BindingResult bindingResult) {
-        notUpdatedException(bindingResult, vesselDTOValidator, vesselDTO);
-        return ResponseEntity.ok(VesselDTO.convertToVesselDTO
-                (vesselsService.updateVessel(IMO, VesselDTO.convertToVessel(vesselDTO, modelMapper)), modelMapper));
-    }
+//    @PutMapping("/{IMO}")
+//    public ResponseEntity<VesselDTO> updateVessel(@PathVariable Integer IMO,
+//                                                  @RequestBody VesselDTO vesselDTO,
+//                                                  BindingResult bindingResult) {
+//        notUpdatedException(bindingResult, vesselDTOValidator, vesselDTO);
+//        return ResponseEntity.ok(VesselDTO.convertToVesselDTO
+//                (vesselsService.updateVessel(IMO, VesselDTO.convertToVessel(vesselDTO, modelMapper)), modelMapper));
+//    }
 }

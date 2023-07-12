@@ -29,4 +29,11 @@ public class ErrorResponse {
             throw new NotUpdatedException("Not updated");
         }
     }
+
+    public static void notCreatedException(BindingResult bindingResult, Validator validator, DTO dto) {
+        validator.validate(dto, bindingResult);
+        if (bindingResult.hasErrors()) {
+            throw new NotCreatedException("Not created");
+        }
+    }
 }
